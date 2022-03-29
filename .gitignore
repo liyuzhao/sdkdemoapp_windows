@@ -9,3 +9,5 @@ npm-debug.log
 server.json
 config.json
 package-lock.json
+easemob.log
+build

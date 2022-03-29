@@ -16,6 +16,8 @@
     "dist": "electron-builder -m",
     "dist-mac": "electron-builder -m",
     "dist-win": "electron-builder -w --ia32 --x64",
+    "pack:x64": "rm -rf build release && cross-env NODE_ENV=production electron-packager ./app DesktopDemo --overwrite --platform=linux --arch=x64 --asar=true --asar.unpack-dir=\"addon\" --out=./release --electron-version 6.1.7 --icon=resources/icons/icon.ico --extra-resource=app/__build__/addon",
+    "pack-deb:x64": "electron-installer-debian --src ./release/DesktopDemo-linux-x64/ --dest ./build/ --arch=amd64 --icon=resources/icons/512x512.png --maintainer=\"liyuzhao <544188885@qq.com>\"",
     "production": "npm run build:app && npm run build:main && npm run dist",
     "prod-mac": "npm run build:app && npm run build:main && npm run dist-mac",
     "prod-win": "npm run build:app && npm run build:main && npm run dist-win"
@@ -59,7 +61,7 @@
     "css-loader": "^0.28.10",
     "cssnano": "^3.10.0",
     "devtron": "^1.4.0",
-    "electron": "^4.0.4",
+    "electron": "6.1.7",
     "electron-builder": "^20.39.0",
     "electron-devtools-installer": "^2.0.1",
     "esdoc": "^1.0.3",

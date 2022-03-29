@@ -13,6 +13,7 @@ electron,
 	from "electron";
 import _ from "underscore";
 const metadata = require("../../package");
+const path = require("path");
 const { shell } = require("electron");
 var exec = require('child_process').exec;
 const IS_MAC_OSX = process.platform === "darwin";
@@ -135,12 +136,23 @@ class AppRemote {
 				},
 			);
 		}
+        if (process.platform === "linux") {
+            trayMenuTemplate.unshift({
+                label: "IM-SDK桌面端Demo",
+                click: () => {
+                    this.openMainWindow();
+                }
+            });
+        }
 		if(this.tray){
 			this.tray.destroy();
 		}
 		// Make tray icon
 		const tray = new Tray(`${this.entryPath}/media/img/tray-icon-16.png`);
 		const trayContextMenu = Menu.buildFromTemplate(trayMenuTemplate);
+        if(!IS_MAC_OSX) {
+            tray.setContextMenu(trayContextMenu);
+        }
 		tray.setToolTip("IM-SDK桌面端Demo");
 		tray.on("click", () => {
 			this.openMainWindow();
@@ -206,6 +218,13 @@ class AppRemote {
 			webPreferences: { webSecurity: false },
 			thickFrame: true,
 			showAfterLoad: true,
+            webPreferences: {
+                nodeIntegration: true,
+                enableRemoteModule: true,
+                webSecurity: false,
+                nativeWindowOpen: true,
+                preload: path.join(ElectronApp.getAppPath(), '/__build__/preLoad.js') // 但预加载的 js 文件内仍可以使用 Nodejs 的 API
+            },
 		};
 
 		if(DEBUG){
@@ -348,3 +367,4 @@ class AppRemote {
 
 const app = new AppRemote();
 export default app;
+

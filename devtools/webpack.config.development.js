@@ -27,7 +27,9 @@ if(env === "production"){
 	if(process.platform === "darwin"){
 		nodePath = "../Resources/app.asar.unpacked/__build__/";
 	}
-	else{
+	else if(process.platform === "linux") {
+		nodePath = "/opt/apps/com.easemob.desktopdemo/files/lib/desktopdemo/resources";
+    } else {
 		nodePath = "resources/app.asar.unpacked/__build__";
 	}
 }
@@ -198,3 +200,4 @@ cfg = merge([
 	}
 ]);
 module.exports = [cfg];
+
