@@ -108,7 +108,7 @@ const utils = {
 
         privateconfigs.chatPort = 17320;
 
-        privateconfigs.restServer = "http://123.114.60.34:17318";
+        privateconfigs.restServer = "https://123.114.60.34:17322";
 
 		return emclient;
 
