@@ -1,7 +1,7 @@
 {
   "name": "huanxin",
   "productName": "环信",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "环信企业即时通讯平台",
   "main": "./app/index.js",
   "scripts": {
